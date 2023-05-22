@@ -25,8 +25,13 @@ types:
       application/json:
         type: AmericanFlight
         examples:
-          output: !include /examples/AmericanFlightNoIDExample.raml
-  
+          input: !include /examples/AmericanFlightNoIDExample.raml
+    responses:
+      201:
+        body:
+          application/json:
+            
+
   /{ID}:
     get:
       responses:
