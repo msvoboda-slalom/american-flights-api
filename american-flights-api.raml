@@ -23,7 +23,9 @@ types:
   post:
     body:
       application/json:
-        type: AmericanFlight 
+        type: AmericanFlight
+        examples:
+          output: !include /examples/AmericanFlightNoIDExample.raml
   
   /{ID}:
     get:
