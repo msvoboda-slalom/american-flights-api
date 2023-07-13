@@ -1,11 +1,29 @@
 #%RAML 1.0
 title: American Flights API
 
+traits:
+  client-id-required:
+    headers:
+      client_id:
+        type: string
+      client_secret:
+        type: string
+    responses:
+      401:
+        description: Unauthorized, The client_id or client_secret are not valid or the client does not have access.
+      429:
+        description: The client used all of its request quota for the current period.
+      500:
+        description: An error occurred, see the specific message (Only if it is a WSDL endpoint).
+      503:
+        description: Contracts Information Unreachable.
+
 types:
   AmericanFlight: !include /exchange_modules/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flight-data-type/1.0.1/AmericanFlightDataType.raml
 
 /flights:
   get:
+    is: [client-id-required]
     queryParameters:
       destination:
         required: false
@@ -22,6 +40,7 @@ types:
               output: !include /exchange_modules/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flights-example/1.0.1/AmericanFlightsExample.raml
               
   post:
+    is: [client-id-required]
     body:
       application/json:
         type: AmericanFlight
@@ -37,6 +56,7 @@ types:
 
   /{ID}:
     get:
+      is: [client-id-required]
       responses:
         200:
           body:
@@ -46,6 +66,7 @@ types:
                 output: !include /examples/AmericanFlightExample.raml
 
     delete:
+      is: [client-id-required]
       responses:
         200:
           body:
@@ -54,6 +75,7 @@ types:
                 message: Flight deleted (but not really)
                 
     put:
+      is: [client-id-required]
       body:
         application/json:
           type: AmericanFlight
