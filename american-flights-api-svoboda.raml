@@ -22,7 +22,8 @@ types:
   AmericanFlight: !include /exchange_modules/68ef9520-24e9-4cf2-b2f5-620025690913/training-american-flight-data-type/1.0.1/AmericanFlightDataType.raml
 
 resourceTypes:
-  
+  examples:
+    AmericanFlightExample: !include /examples/AmericanFlightNoIDExample.raml
 
 /flights:
   get:
@@ -66,7 +67,7 @@ resourceTypes:
             application/json:
               type: AmericanFlight
               examples:
-                output: !include /examples/AmericanFlightExample.raml
+                output: America
 
     delete:
       is: [client-id-required]
